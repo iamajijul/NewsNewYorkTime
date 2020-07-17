@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">New York Times</string>
+    <string name="retry_text">Retry</string>
+</resources>
