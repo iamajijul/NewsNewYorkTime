@@ -9,7 +9,7 @@ import com.ajijul.newsnewyorktimes.network.ResponseWrapper
 import com.ajijul.ny.news_feed.model.NyNewsFeedBaseModel
 import kotlinx.coroutines.launch
 
-class ArticleViewModel @ViewModelInject constructor(var repository: ArticleRepository) :
+class ArticleViewModel @ViewModelInject constructor(private var repository: ArticleRepository) :
     ViewModel() {
 
 
@@ -21,7 +21,7 @@ class ArticleViewModel @ViewModelInject constructor(var repository: ArticleRepos
 
     fun observeArticles(): LiveData<ResponseWrapper<NyNewsFeedBaseModel?>> = allLatestArticle
 
-    private fun getLatestArticles() = viewModelScope.launch {
+    fun getLatestArticles() = viewModelScope.launch {
         allLatestArticle.postValue(ResponseWrapper.Loading())
         val response =
             repository.getArticles()

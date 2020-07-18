@@ -7,7 +7,7 @@ import com.ajijul.newsnewyorktimes.db.NewYorkTimesDatabase
 import com.ajijul.newsnewyorktimes.helper.Constant.DATABASE_NAME
 import com.ajijul.newsnewyorktimes.ui.articles.ArticleRepository
 import com.ajijul.newsnewyorktimes.ui.articles.ArticleRepositoryImpl
-import com.ajijul.ny.gateway.network.NewYorkTimeAPIEndPoint
+import com.ajijul.newsnewyorktimes.network.NewYorkTimeAPIEndPoint
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

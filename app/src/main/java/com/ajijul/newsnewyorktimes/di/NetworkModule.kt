@@ -1,7 +1,7 @@
 package com.ajijul.newsnewyorktimes.di
 
 import com.ajijul.newsnewyorktimes.helper.Constant.BASE_URL
-import com.ajijul.ny.gateway.network.NewYorkTimeAPIEndPoint
+import com.ajijul.newsnewyorktimes.network.NewYorkTimeAPIEndPoint
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,12 +29,18 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideLoggingIntercepter(): HttpLoggingInterceptor = HttpLoggingInterceptor()
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return interceptor
+
+    }
 
     @Singleton
     @Provides
     fun provideHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+
 
     @Singleton
     @Provides
