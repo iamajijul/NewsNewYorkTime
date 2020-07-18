@@ -3,4 +3,6 @@
     <string name="retry_text">Retry</string>
     <string name="successMessage">Successfully fetched</string>
     <string name="errorMessage">Error</string>
+    <string name="ok">Ok</string>
+    <string name="offlineMesssage">Check device internet connection.</string>
 </resources>

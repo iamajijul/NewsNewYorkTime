@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':network_monitoring')
     implementation deps.kotlin.stdlib
     implementation deps.android.appcompat
     implementation deps.android.core
@@ -60,18 +61,22 @@ dependencies {
     implementation deps.kotlin.coroutine_android
 
 
-    //ViewModel
+    //Life Cycle ViewModel
     implementation deps.ac.lifecycle_viewmodel
 
-    // Coroutine Lifecycle Scopes
+    // Life Cycle Runtime
     implementation deps.ac.lifecycle_runtime
+
+    // Life Cycle LiveData
+    implementation deps.ac.lifecycle_livedata
+
+    //lifecycle Extension
+    implementation deps.ac.lifecycle
 
     // Navigation Components
     implementation deps.ac.navigation_fragment
     implementation deps.ac.navigation_ui
 
-    //lifecycle
-    implementation deps.ac.lifecycle
 
     // Retrofit
     implementation deps.squareup.retrofit

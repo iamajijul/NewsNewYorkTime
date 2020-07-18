@@ -1,2 +1,3 @@
+include ':network_monitoring'
 include ':app'
 rootProject.name = "NewsNewYorkTimes"

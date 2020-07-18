@@ -5,6 +5,7 @@ import com.ajijul.newsnewyorktimes.db.NewYorkTimesDAO
 import com.ajijul.newsnewyorktimes.network.ResponseWrapper
 import com.ajijul.newsnewyorktimes.network.NewYorkTimeAPIEndPoint
 import com.ajijul.ny.news_feed.model.NyNewsFeedBaseModel
+import com.ajijul.ny.news_feed.model.Result
 import javax.inject.Inject
 
 class ArticleRepositoryImpl @Inject constructor(
@@ -15,6 +16,17 @@ class ArticleRepositoryImpl @Inject constructor(
         return safeApiCall {
             apiEndPoint.getArticles().body()
         }
+    }
+
+    override suspend fun insertArticlesIntoDataBase(data: List<Result>) {
+
+        dao.insertOrUpdateArticles(data)
+    }
+
+    override suspend fun getAllArticlesFromDataBase(): List<Result> {
+
+        return dao.getAllArticles()
+
     }
 
 

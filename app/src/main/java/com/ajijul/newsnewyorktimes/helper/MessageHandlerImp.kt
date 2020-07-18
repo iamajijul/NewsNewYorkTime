@@ -9,45 +9,64 @@ import javax.inject.Inject
 
 class MessageHandlerImp @Inject constructor() : MessageHandler {
 
-    override fun showSnackErrorWithAction(view: View, msg: Int, action: () -> Unit) {
+    override fun showSnackErrorWithAction(
+        view: View,
+        actionName: Int,
+        msg: Int,
+        action: () -> Unit
+    ) {
         val snackbar = view.indefiniteSnackbar(msg)
-        snackbar.setAction(R.string.retry_text) { action() }
+        snackbar.setAction(actionName) { action() }
         snackbar.view.setBackgroundColor(
             ContextCompat.getColor(
                 view.context,
                 android.R.color.holo_red_dark
             )
         )
-        snackbar.setTextColor( ContextCompat.getColor(
-            view.context,
-            android.R.color.white
-        ))
-        snackbar.setActionTextColor( ContextCompat.getColor(
-            view.context,
-            android.R.color.white
-        ))
+        snackbar.setTextColor(
+            ContextCompat.getColor(
+                view.context,
+                android.R.color.white
+            )
+        )
+        snackbar.setActionTextColor(
+            ContextCompat.getColor(
+                view.context,
+                android.R.color.white
+            )
+        )
         snackbar.show()
     }
 
-    override fun showSnackErrorWithAction(view: View, msg: String, action: () -> Unit) {
+    override fun showSnackErrorWithAction(
+        view: View,
+        actionName: String,
+        msg: String,
+        action: () -> Unit
+    ) {
         val snackbar = view.indefiniteSnackbar(msg)
-        snackbar.setAction(R.string.retry_text) { action() }
+        snackbar.setAction(actionName) { action() }
         snackbar.view.setBackgroundColor(
             ContextCompat.getColor(
                 view.context,
                 android.R.color.holo_red_dark
             )
         )
-        snackbar.setTextColor( ContextCompat.getColor(
-            view.context,
-            android.R.color.white
-        ))
-        snackbar.setActionTextColor( ContextCompat.getColor(
-            view.context,
-            android.R.color.white
-        ))
+        snackbar.setTextColor(
+            ContextCompat.getColor(
+                view.context,
+                android.R.color.white
+            )
+        )
+        snackbar.setActionTextColor(
+            ContextCompat.getColor(
+                view.context,
+                android.R.color.white
+            )
+        )
         snackbar.show()
     }
+
 
     override fun showSnackSuccess(view: View, msg: Int, long: Boolean) {
         val snackbar = if (!long) view.snackbar(msg)
@@ -55,15 +74,24 @@ class MessageHandlerImp @Inject constructor() : MessageHandler {
         val textView =
             snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView //Get reference of snackbar textview
         textView.maxLines = 5
-        snackbar.view.setBackgroundColor(ContextCompat.getColor(view.context, android.R.color.holo_green_dark))
-        snackbar.setTextColor( ContextCompat.getColor(
-            view.context,
-            android.R.color.white
-        ))
-        snackbar.setActionTextColor( ContextCompat.getColor(
-            view.context,
-            android.R.color.white
-        ))
+        snackbar.view.setBackgroundColor(
+            ContextCompat.getColor(
+                view.context,
+                android.R.color.holo_green_dark
+            )
+        )
+        snackbar.setTextColor(
+            ContextCompat.getColor(
+                view.context,
+                android.R.color.white
+            )
+        )
+        snackbar.setActionTextColor(
+            ContextCompat.getColor(
+                view.context,
+                android.R.color.white
+            )
+        )
         snackbar.show()
     }
 }

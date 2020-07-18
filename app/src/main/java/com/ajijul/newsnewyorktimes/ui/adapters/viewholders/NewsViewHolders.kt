@@ -10,7 +10,7 @@ class NewsViewHolders(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     fun setData(article: Result){
         itemView.apply {
-            Glide.with(this).load(article.media?.get(0)?.mediaMetadata?.get(2)?.url).into(ivArticleImage)
+//            Glide.with(this).load(article.media?.get(0)?.mediaMetadata?.get(2)?.url).into(ivArticleImage)
             tvSource.text  =article.source
             tvTitle.text = article.title
             tvDescription.text = article.abstract
