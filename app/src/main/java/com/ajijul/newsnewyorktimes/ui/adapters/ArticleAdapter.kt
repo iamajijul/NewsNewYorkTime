@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ajijul.newsnewyorktimes.R
+import com.ajijul.newsnewyorktimes.databinding.ItemArticleBinding
 import com.ajijul.newsnewyorktimes.ui.adapters.viewholders.NewsViewHolders
 import com.ajijul.ny.news_feed.model.Result
 
@@ -28,16 +28,14 @@ class ArticleAdapter : RecyclerView.Adapter<NewsViewHolders>() {
 
     var differList = AsyncListDiffer(this, differCallBack)
     private var onItemClickListener: ((Result) -> Unit)? = null
-
-    fun setOnClickListener(listener: ((Result) -> Unit)?) {
+    fun setOnClickListener(listener: ((Result) -> Unit)) {
         onItemClickListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolders {
 
         return NewsViewHolders(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_article_preview, parent, false)
+            ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -47,7 +45,7 @@ class ArticleAdapter : RecyclerView.Adapter<NewsViewHolders>() {
 
     override fun onBindViewHolder(holder: NewsViewHolders, position: Int) {
         val article = differList.currentList[position]
-        holder.setData(article)
+        holder.bind(article)
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
                 it(article)

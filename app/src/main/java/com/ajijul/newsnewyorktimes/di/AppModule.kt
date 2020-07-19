@@ -1,13 +1,15 @@
 package com.ajijul.newsnewyorktimes.di
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.room.Room
 import com.ajijul.newsnewyorktimes.db.NewYorkTimesDAO
 import com.ajijul.newsnewyorktimes.db.NewYorkTimesDatabase
 import com.ajijul.newsnewyorktimes.helper.Constant.DATABASE_NAME
+import com.ajijul.newsnewyorktimes.network.NewYorkTimeAPIEndPoint
 import com.ajijul.newsnewyorktimes.ui.articles.ArticleRepository
 import com.ajijul.newsnewyorktimes.ui.articles.ArticleRepositoryImpl
-import com.ajijul.newsnewyorktimes.network.NewYorkTimeAPIEndPoint
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,5 +41,15 @@ object AppModule {
         dao: NewYorkTimesDAO
     ): ArticleRepository =
         ArticleRepositoryImpl(dao = dao, apiEndPoint = api)
+
+
+    @Singleton
+    @Provides
+    fun provideChromeBrowserViewIntent(): Intent {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.setPackage("com.android.chrome")
+        return intent
+    }
 
 }

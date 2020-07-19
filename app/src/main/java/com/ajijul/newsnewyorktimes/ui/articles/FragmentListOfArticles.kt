@@ -1,5 +1,7 @@
 package com.ajijul.newsnewyorktimes.ui.articles
 
+import android.content.ActivityNotFoundException
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -11,6 +13,8 @@ import com.ajijul.newsnewyorktimes.ui.adapters.ArticleAdapter
 import fr.dasilvacampos.network.monitoring.Event
 import fr.dasilvacampos.network.monitoring.NetworkConnectivityListener
 import kotlinx.android.synthetic.main.fragment_list_of_article.*
+import timber.log.Timber
+
 
 class FragmentListOfArticles : BaseFragment(R.layout.fragment_list_of_article),
     NetworkConnectivityListener {
@@ -62,6 +66,14 @@ class FragmentListOfArticles : BaseFragment(R.layout.fragment_list_of_article),
 
     private fun setUpOurRecyclerView() {
         articleAdapter = ArticleAdapter()
+        articleAdapter.setOnClickListener {
+            chromeBrowserIntent.setData(Uri.parse(it.url))
+            try {
+                requireContext().startActivity(chromeBrowserIntent)
+            } catch (ex: ActivityNotFoundException) {
+                messageHandlerImp.showSnackErrorWithAction(mainView,R.string.ok,R.string.noAppFound){}
+            }
+        }
         rvArticles.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(requireContext())

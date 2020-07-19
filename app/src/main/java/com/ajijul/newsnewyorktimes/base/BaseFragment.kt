@@ -1,5 +1,6 @@
 package com.ajijul.newsnewyorktimes.base
 
+import android.content.Intent
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -11,12 +12,15 @@ import fr.dasilvacampos.network.monitoring.NetworkConnectivityListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
-open class BaseFragment constructor(layoutId : Int) : Fragment(layoutId)
-     {
+open class BaseFragment constructor(layoutId: Int) : Fragment(layoutId) {
 
     protected val viewModel by activityViewModels<ArticleViewModel>()
+
     @Inject
     lateinit var messageHandlerImp: MessageHandlerImp
+
+    @Inject
+    lateinit var chromeBrowserIntent: Intent
 
     protected val mainView: View by lazy {
         requireView()
