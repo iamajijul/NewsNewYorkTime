@@ -1,6 +1,6 @@
 # NYT
 
-This Application fetching the latest article from New York Times Magazine with Offline facility.
+This Application fetching all the latest article from New York Times Magazine with Offline facility.
 
 The app follows the MVVM architecture with the repository pattern, alongside Dagger_Hilt for DI.
 
@@ -38,7 +38,7 @@ Whole project written in kotlin language.
 
 I have written unit test for two main class "BaseRepository.kt"(For network operation test) and 
 "ArticleRepository.kt"(For Database operation check). Run the test by clicking on run icon beside the 
-test method.
+test method. Also tested UI visibility for one class "FragmentListOfArticles.class".
 
 
 

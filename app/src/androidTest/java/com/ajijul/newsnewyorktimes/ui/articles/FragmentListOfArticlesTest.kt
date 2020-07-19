@@ -1,10 +1,8 @@
-/*
 package com.ajijul.newsnewyorktimes.ui.articles
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -42,9 +40,9 @@ class FragmentListOfArticlesTest{
     fun test_itemClickOnRecyclerView() {
 
         // Click list item
-        Espresso.onView(withId(R.id.rvArticles))
-            .perform(actionOnItemAtPosition<NewsViewHolders>(LIST_ITEM_IN_TEST, ViewActions.click()))
+//        Espresso.onView(withId(R.id.rvArticles))
+//            .perform(actionOnItemAtPosition<NewsViewHolders>(LIST_ITEM_IN_TEST, ViewActions.click()))
 
 
     }
-}*/
+}
