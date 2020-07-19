@@ -9,8 +9,9 @@ sealed class ResponseWrapper<out T> {
     ) : ResponseWrapper<T>()
 
     data class Error(
-        var message: String? = null,
-        var code: Int? = null
+        var code: Int? = null,
+        var message: String? = null
+
     ) : ResponseWrapper<Nothing>()
 
     class Loading : ResponseWrapper<Nothing>()

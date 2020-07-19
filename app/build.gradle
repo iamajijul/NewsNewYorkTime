@@ -35,6 +35,9 @@ android {
     dataBinding {
         enabled = true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -45,7 +48,10 @@ dependencies {
     implementation deps.android.core
     implementation deps.android.constraint_layout
     testImplementation deps.android.junit
+    testImplementation deps.other.json
     androidTestImplementation deps.android.junit_ext
+    androidTestImplementation deps.android.test_rule
+    androidTestImplementation deps.android.test_runner
     androidTestImplementation deps.android.espresso
 
     // Material Design
@@ -62,6 +68,7 @@ dependencies {
     // Coroutines
     implementation deps.kotlin.coroutine_core
     implementation deps.kotlin.coroutine_android
+    implementation deps.kotlin.coroutine_test
 
 
     //Life Cycle ViewModel
@@ -102,6 +109,7 @@ dependencies {
 
     // Timber
     implementation deps.other.timber
+    implementation deps.other.mockito
 
 }
 kapt {

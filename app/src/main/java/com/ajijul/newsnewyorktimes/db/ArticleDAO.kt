@@ -5,7 +5,7 @@ import androidx.room.*
 import com.ajijul.ny.news_feed.model.Result
 
 @Dao
-interface NewYorkTimesDAO {
+interface ArticleDAO {
 
     @Transaction
     suspend fun insertOrUpdateArticles(articles: List<Result>) {
@@ -15,6 +15,7 @@ interface NewYorkTimesDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllArticles(articles: List<Result>)
+
 
     @Query("DELETE FROM new_york_time")
     suspend fun deleteAllArticles()

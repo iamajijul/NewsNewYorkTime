@@ -2,10 +2,9 @@ package com.ajijul.newsnewyorktimes.di
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.room.Room
-import com.ajijul.newsnewyorktimes.db.NewYorkTimesDAO
-import com.ajijul.newsnewyorktimes.db.NewYorkTimesDatabase
+import com.ajijul.newsnewyorktimes.db.ArticleDAO
+import com.ajijul.newsnewyorktimes.db.ArticleDatabase
 import com.ajijul.newsnewyorktimes.helper.Constant.DATABASE_NAME
 import com.ajijul.newsnewyorktimes.network.NewYorkTimeAPIEndPoint
 import com.ajijul.newsnewyorktimes.ui.articles.ArticleRepository
@@ -23,8 +22,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideArticleDatabase(@ApplicationContext context: Context): NewYorkTimesDatabase =
-        Room.databaseBuilder(context, NewYorkTimesDatabase::class.java, DATABASE_NAME)
+    fun provideArticleDatabase(@ApplicationContext context: Context): ArticleDatabase =
+        Room.databaseBuilder(context, ArticleDatabase::class.java, DATABASE_NAME)
             .fallbackToDestructiveMigration()// if I change the database version, old version will
             // remove from device and a new version will create.
             .build()
@@ -32,13 +31,13 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideArticleDao(db: NewYorkTimesDatabase) = db.getNewYorkTimesDao()
+    fun provideArticleDao(db: ArticleDatabase) = db.getNewYorkTimesDao()
 
     @Singleton
     @Provides
     fun provideNewsRepository(
         api: NewYorkTimeAPIEndPoint,
-        dao: NewYorkTimesDAO
+        dao: ArticleDAO
     ): ArticleRepository =
         ArticleRepositoryImpl(dao = dao, apiEndPoint = api)
 

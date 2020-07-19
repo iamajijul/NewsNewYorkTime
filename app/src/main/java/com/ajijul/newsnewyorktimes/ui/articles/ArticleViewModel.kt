@@ -23,7 +23,7 @@ class ArticleViewModel @ViewModelInject constructor(private var repository: Arti
     }
 
     fun observeArticlesOnline(): LiveData<ResponseWrapper<NyNewsFeedBaseModel?>> =
-        retryRequest.switchMap { status ->
+        retryRequest.switchMap {
                 articles
 
         }

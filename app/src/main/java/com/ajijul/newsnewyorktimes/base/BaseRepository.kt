@@ -25,7 +25,7 @@ open class BaseRepository {
                     is HttpException -> {
                         val code =throwable.code()
                         val errorMessage = convertErrorBody(throwable)
-                        ResponseWrapper.Error(errorMessage,code)
+                        ResponseWrapper.Error(code,errorMessage)
                     }
                     else ->{
                         ResponseWrapper.Error()
