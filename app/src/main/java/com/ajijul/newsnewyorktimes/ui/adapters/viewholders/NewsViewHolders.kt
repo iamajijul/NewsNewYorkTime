@@ -6,12 +6,12 @@ import com.ajijul.ny.news_feed.model.Result
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_article_preview.view.*
 
-class NewsViewHolders(itemView : View) : RecyclerView.ViewHolder(itemView) {
+class NewsViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun setData(article: Result){
+    fun setData(article: Result) {
         itemView.apply {
-//            Glide.with(this).load(article.media?.get(0)?.mediaMetadata?.get(2)?.url).into(ivArticleImage)
-            tvSource.text  =article.source
+            Glide.with(this).load(article.mediaImageUrl).into(ivArticleImage)
+            tvSource.text = article.source
             tvTitle.text = article.title
             tvDescription.text = article.abstract
             tvPublishedAt.text = article.publishedDate

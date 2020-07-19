@@ -1,5 +1,6 @@
 package com.ajijul.newsnewyorktimes.ui.articles
 
+import androidx.lifecycle.LiveData
 import com.ajijul.newsnewyorktimes.base.BaseRepository
 import com.ajijul.newsnewyorktimes.db.NewYorkTimesDAO
 import com.ajijul.newsnewyorktimes.network.ResponseWrapper
@@ -23,7 +24,7 @@ class ArticleRepositoryImpl @Inject constructor(
         dao.insertOrUpdateArticles(data)
     }
 
-    override suspend fun getAllArticlesFromDataBase(): List<Result> {
+    override fun getAllArticlesFromDataBase(): LiveData<List<Result>> {
 
         return dao.getAllArticles()
 

@@ -49,7 +49,7 @@ class FragmentListOfArticles : BaseFragment(R.layout.fragment_list_of_article),
                         R.string.retry_text,
                         R.string.errorMessage
                     ) {
-                        viewModel.observeArticlesOnline()
+                        viewModel.retryToFetchedArticle(true)
                     }
 
                 }
@@ -87,6 +87,7 @@ class FragmentListOfArticles : BaseFragment(R.layout.fragment_list_of_article),
                     R.string.ok,
                     R.string.offlineMesssage
                 ) {
+                    viewModel.retryToFetchedArticle(true)
                 }
                 observerOfflineData()
             }

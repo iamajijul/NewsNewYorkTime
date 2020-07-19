@@ -8,19 +8,19 @@ import com.ajijul.ny.news_feed.model.Result
 interface NewYorkTimesDAO {
 
     @Transaction
-    fun insertOrUpdateArticles(articles: List<Result>) {
+    suspend fun insertOrUpdateArticles(articles: List<Result>) {
         deleteAllArticles()
         insertAllArticles(articles)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllArticles(articles: List<Result>)
+    suspend fun insertAllArticles(articles: List<Result>)
 
     @Query("DELETE FROM new_york_time")
-    fun deleteAllArticles()
+    suspend fun deleteAllArticles()
 
     @Query("SELECT * FROM new_york_time")
-    fun getAllArticles(): List<Result>
+    fun getAllArticles(): LiveData<List<Result>>
 
 
 }

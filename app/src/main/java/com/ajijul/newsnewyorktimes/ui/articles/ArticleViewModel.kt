@@ -1,37 +1,44 @@
 package com.ajijul.newsnewyorktimes.ui.articles
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.ajijul.newsnewyorktimes.base.BaseViewModel
 import com.ajijul.newsnewyorktimes.network.ResponseWrapper
 import com.ajijul.ny.news_feed.model.NyNewsFeedBaseModel
 import com.ajijul.ny.news_feed.model.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class ArticleViewModel @ViewModelInject constructor(private var repository: ArticleRepository) :
     BaseViewModel() {
 
 
-    private var allLatestArticle = MutableLiveData<List<Result>>()
+    private var retryRequest = MutableLiveData<Boolean>()
 
-    fun observeArticlesOffline(): LiveData<List<Result>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            allLatestArticle.postValue(repository.getAllArticlesFromDataBase())
-        }
-        return allLatestArticle
+    fun observeArticlesOffline(): LiveData<List<Result>> = repository.getAllArticlesFromDataBase()
+
+    init {
+        retryRequest.value = true
     }
 
-    fun observeArticlesOnline() = liveData(Dispatchers.IO) {
+    fun observeArticlesOnline(): LiveData<ResponseWrapper<NyNewsFeedBaseModel?>> =
+        retryRequest.switchMap { status ->
+                articles
+
+        }
+
+    var articles: LiveData<ResponseWrapper<NyNewsFeedBaseModel?>> = liveData(Dispatchers.IO) {
         emit(ResponseWrapper.Loading())
         repository.getArticles().let {
             emit(it)
             when (it) {
                 is ResponseWrapper.Success -> {
-                    it.data?.results?.let {
+                    it.data?.results?.map {
+                        result ->
+                        result.mediaImageUrl = result.media?.get(0)?.mediaMetadata?.get(2)?.url
+                        result
+                    }?.let {
                         repository.insertArticlesIntoDataBase(it)
                     }
                 }
@@ -40,7 +47,11 @@ class ArticleViewModel @ViewModelInject constructor(private var repository: Arti
             }
 
         }
+    }
 
+    fun retryToFetchedArticle(status: Boolean) {
+        retryRequest.value = status
     }
 
 }
+
